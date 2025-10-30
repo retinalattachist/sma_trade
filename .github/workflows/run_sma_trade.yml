@@ -1,0 +1,48 @@
+name: Weekly Position Report
+
+on:
+  # 1. 스케줄 실행 (금요일 21:20 UTC -> 토요일 06:20 KST)
+  schedule:
+    - cron: '20 21 * * 5'
+  
+
+      
+  # 2. 수동 실행 (Actions 탭에 버튼 생성)
+  workflow_dispatch:
+
+jobs:
+  build-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 리포지토리 코드 가져오기
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Python 환경 설정
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. 의존성 설치 (requirements.txt 사용)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. 스크립트 실행
+      - name: Run Check and Send Email
+        env:
+          # 공통 환경 변수
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          
+          # [수정] 실행 방식에 따라 EMAIL_TO_1을 다르게 설정
+          # 수동 실행(workflow_dispatch)이면 빈 문자열("")을,
+          # 아니면(스케줄 실행 등) secrets.EMAIL_TO_1 값을 사용합니다.
+          
+          #EMAIL_TO_1: ${{ github.event_name == 'workflow_dispatch' && '' || secrets.EMAIL_TO_1 }}
+          EMAIL_TO_1: ${{ secrets.EMAIL_TO_1 }}
+          
+        run: python sma_trade.py
