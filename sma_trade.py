@@ -128,8 +128,8 @@ if __name__ == "__main__":
 ---
 [참고: 전체 전략 맵]
 """
-    for state_str, alloc in my_strategy.items():
-        email_body += f"- {state_str:<25}: {alloc * 100:.0f}%\n"
+    #for state_str, alloc in my_strategy.items():
+    #    email_body += f"- {state_str:<25}: {alloc * 100:.0f}%\n"
 
     # (GitHub Actions 로그 확인을 위해 콘솔에는 항상 출력)
     print("--- 분석 결과 (콘솔 로그) ---")
