@@ -115,9 +115,7 @@ if __name__ == "__main__":
     email_subject = f"주간 {Ticker} 리밸런싱 알림 ({last_date})"
     
     email_body = f"""
-안녕하세요,
-
-{last_date} 기준 {Ticker}의 현재 상태 및 권장 비중입니다.
+{last_date} 기준 {Ticker}의 현재 상태 및 권장 비중입니다. 나머지는 SGOV를 매수하십시오.
 
 ■ 현재 SMA 상태
 -> {current_state_str}
@@ -125,8 +123,6 @@ if __name__ == "__main__":
 ■ 권장 비중 (전략 기준)
 -> {current_alloc * 100:.0f}%
 
----
-[참고: 전체 전략 맵]
 """
     #for state_str, alloc in my_strategy.items():
     #    email_body += f"- {state_str:<25}: {alloc * 100:.0f}%\n"
