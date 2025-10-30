@@ -42,7 +42,7 @@ jobs:
           # 수동 실행(workflow_dispatch)이면 빈 문자열("")을,
           # 아니면(스케줄 실행 등) secrets.EMAIL_TO_1 값을 사용합니다.
           
-          #EMAIL_TO_1: ${{ github.event_name == 'workflow_dispatch' && '' || secrets.EMAIL_TO_1 }}
-          EMAIL_TO_1: ${{ secrets.EMAIL_TO_1 }}
+          EMAIL_TO_1: ${{ github.event_name == 'workflow_dispatch' && '' || secrets.EMAIL_TO_1 }}
+          #EMAIL_TO_1: ${{ secrets.EMAIL_TO_1 }}
           
         run: python sma_trade.py
