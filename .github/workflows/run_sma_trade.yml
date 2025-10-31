@@ -45,4 +45,4 @@ jobs:
           EMAIL_TO_1: ${{ github.event_name == 'workflow_dispatch' && '' || secrets.EMAIL_TO_1 }}
           #EMAIL_TO_1: ${{ secrets.EMAIL_TO_1 }}
           
-        run: python sma_trade.py
+        #run: python sma_trade.py
